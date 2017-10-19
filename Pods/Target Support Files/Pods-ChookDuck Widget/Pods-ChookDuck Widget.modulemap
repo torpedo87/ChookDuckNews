@@ -1,0 +1,6 @@
+framework module Pods_ChookDuck_Widget {
+  umbrella header "Pods-ChookDuck Widget-umbrella.h"
+
+  export *
+  module * { export * }
+}
