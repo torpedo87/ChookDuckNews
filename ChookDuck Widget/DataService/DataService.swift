@@ -20,7 +20,7 @@ class DataService {
     
     var html = ""
     do {
-      html = try String(contentsOf: URL(string: BASE_URL)!)
+      html = try String(contentsOf: URL(string: (ClubDataService.instance.selectedClub?.clubURL)!)!)
     } catch {
       print(error.localizedDescription)
     }

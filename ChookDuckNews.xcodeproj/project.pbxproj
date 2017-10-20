@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		487FF66A1F99B85E009EE51B /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C18BA11F9749C5005AAE0C /* DataService.swift */; };
+		487FF66B1F99B862009EE51B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C18BA41F974A02005AAE0C /* Constant.swift */; };
+		487FF66C1F99B869009EE51B /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C18BA71F987599005AAE0C /* Article.swift */; };
+		487FF66D1F99B874009EE51B /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C832381F90C21900AD914D /* CustomCell.swift */; };
+		487FF66F1F99BA1B009EE51B /* Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487FF66E1F99BA1B009EE51B /* Club.swift */; };
+		487FF6701F99BE3E009EE51B /* Club.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487FF66E1F99BA1B009EE51B /* Club.swift */; };
+		487FF6781F99D5A7009EE51B /* SelectTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487FF6761F99D5A7009EE51B /* SelectTeamVC.swift */; };
+		487FF67D1F99EFFC009EE51B /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487FF67C1F99EFFC009EE51B /* TeamCell.swift */; };
+		487FF6861F99FA18009EE51B /* ClubDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487FF6851F99FA18009EE51B /* ClubDataService.swift */; };
+		487FF6871F99FA6C009EE51B /* ClubDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487FF6851F99FA18009EE51B /* ClubDataService.swift */; };
 		48C18BA21F9749C5005AAE0C /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C18BA11F9749C5005AAE0C /* DataService.swift */; };
 		48C18BA51F974A02005AAE0C /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C18BA41F974A02005AAE0C /* Constant.swift */; };
 		48C18BA61F975252005AAE0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48C831F41F8F60E600AD914D /* Assets.xcassets */; };
@@ -52,6 +62,15 @@
 
 /* Begin PBXFileReference section */
 		07CB5166F21416533E04B9F2 /* Pods-ChookDuck Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChookDuck Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChookDuck Widget/Pods-ChookDuck Widget.debug.xcconfig"; sourceTree = "<group>"; };
+		487FF6611F99B794009EE51B /* Pods_ChookDuckNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_ChookDuckNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		487FF6631F99B798009EE51B /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		487FF6651F99B7A1009EE51B /* Fuzi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Fuzi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		487FF6671F99B7A5009EE51B /* Pods_ChookDuck_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_ChookDuck_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		487FF6691F99B7AA009EE51B /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		487FF66E1F99BA1B009EE51B /* Club.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Club.swift; sourceTree = "<group>"; };
+		487FF6761F99D5A7009EE51B /* SelectTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTeamVC.swift; sourceTree = "<group>"; };
+		487FF67C1F99EFFC009EE51B /* TeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
+		487FF6851F99FA18009EE51B /* ClubDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClubDataService.swift; sourceTree = "<group>"; };
 		48C18B8B1F97373E005AAE0C /* ChookDuckNews.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChookDuckNews.entitlements; sourceTree = "<group>"; };
 		48C18BA11F9749C5005AAE0C /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		48C18BA41F974A02005AAE0C /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -105,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		487FF6841F99FA0A009EE51B /* ClubDataService */ = {
+			isa = PBXGroup;
+			children = (
+				487FF6851F99FA18009EE51B /* ClubDataService.swift */,
+			);
+			path = ClubDataService;
+			sourceTree = "<group>";
+		};
 		48C18B971F974660005AAE0C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +195,7 @@
 		48C831EC1F8F60E500AD914D /* ChookDuckNews */ = {
 			isa = PBXGroup;
 			children = (
+				487FF6841F99FA0A009EE51B /* ClubDataService */,
 				48C18B8B1F97373E005AAE0C /* ChookDuckNews.entitlements */,
 				48C832011F8F618B00AD914D /* Model */,
 				48C832001F8F618300AD914D /* View */,
@@ -184,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				48C832021F8F61B000AD914D /* FeedVC.swift */,
+				487FF6761F99D5A7009EE51B /* SelectTeamVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -191,6 +220,7 @@
 		48C832001F8F618300AD914D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				487FF67C1F99EFFC009EE51B /* TeamCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,6 +228,7 @@
 		48C832011F8F618B00AD914D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				487FF66E1F99BA1B009EE51B /* Club.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,6 +251,11 @@
 		A792954E55368A9271BDE7B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				487FF6691F99B7AA009EE51B /* SnapKit.framework */,
+				487FF6671F99B7A5009EE51B /* Pods_ChookDuck_Widget.framework */,
+				487FF6651F99B7A1009EE51B /* Fuzi.framework */,
+				487FF6631F99B798009EE51B /* SnapKit.framework */,
+				487FF6611F99B794009EE51B /* Pods_ChookDuckNews.framework */,
 				48C8323F1F90CA1E00AD914D /* Fuzi.framework */,
 				48C8323D1F90C66400AD914D /* Fuzi.framework */,
 				48C8323B1F90C55F00AD914D /* Fuzi.framework */,
@@ -452,8 +488,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				487FF66A1F99B85E009EE51B /* DataService.swift in Sources */,
 				48C832031F8F61B000AD914D /* FeedVC.swift in Sources */,
 				48C831EE1F8F60E500AD914D /* AppDelegate.swift in Sources */,
+				487FF66F1F99BA1B009EE51B /* Club.swift in Sources */,
+				487FF66B1F99B862009EE51B /* Constant.swift in Sources */,
+				487FF6781F99D5A7009EE51B /* SelectTeamVC.swift in Sources */,
+				487FF66D1F99B874009EE51B /* CustomCell.swift in Sources */,
+				487FF6861F99FA18009EE51B /* ClubDataService.swift in Sources */,
+				487FF66C1F99B869009EE51B /* Article.swift in Sources */,
+				487FF67D1F99EFFC009EE51B /* TeamCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,9 +506,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				48C18BA21F9749C5005AAE0C /* DataService.swift in Sources */,
+				487FF6701F99BE3E009EE51B /* Club.swift in Sources */,
 				48C832391F90C21900AD914D /* CustomCell.swift in Sources */,
 				48C832251F90B9DD00AD914D /* TodayViewController.swift in Sources */,
 				48C18BA51F974A02005AAE0C /* Constant.swift in Sources */,
+				487FF6871F99FA6C009EE51B /* ClubDataService.swift in Sources */,
 				48C18BA81F987599005AAE0C /* Article.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

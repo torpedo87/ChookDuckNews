@@ -18,6 +18,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     super.viewDidLoad()
     tableView.delegate = self
     tableView.dataSource = self
+    NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.redraw(_:)), name: NOTI_CLUB_CHANGED, object: nil)
     
     extensionContext?.widgetLargestAvailableDisplayMode = .expanded
   }
@@ -25,9 +26,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    DataService.instance.fetchFeed { (newsDict) in
-      self.tableView.reloadData()
+    if ClubDataService.instance.selectedClub != nil {
+      DataService.instance.fetchFeed { (newsDict) in
+        self.tableView.reloadData()
+      }
     }
+    
   }
   
   override func viewDidLayoutSubviews() {
@@ -35,24 +39,37 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
   }
   
+  @objc func redraw(_ notification: Notification) {
+    tableView.reloadData()
+  }
+  
+  //위젯이 업데이트 될 때까지 최근 스냅샷을 제공
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-    // Perform any setup necessary in order to update the view.
-    
-    // If an error is encountered, use NCUpdateResult.Failed
-    // If there's no update required, use NCUpdateResult.NoData
-    // If there's an update, use NCUpdateResult.NewData
+    if ClubDataService.instance.selectedClub != nil {
+      DataService.instance.fetchFeed { (success) in
+        if success {
+          self.tableView.reloadData()
+          completionHandler(.newData)
+        } else {
+          completionHandler(.failed)
+        }
+      }
+    }
     
     completionHandler(NCUpdateResult.newData)
   }
   
+  //위젯 높이 조절
   func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
     let expanded = activeDisplayMode == .expanded
-    preferredContentSize = expanded ? CGSize(width: maxSize.width, height: 200) : maxSize
+    preferredContentSize = expanded ? CGSize(width: maxSize.width, height: 500) : maxSize
   }
   
   @IBAction func reloadBtnPressed(_ sender: Any) {
-    DataService.instance.fetchFeed { (newsDict) in
-      self.tableView.reloadData()
+    if ClubDataService.instance.selectedClub != nil {
+      DataService.instance.fetchFeed { (newsDict) in
+        self.tableView.reloadData()
+      }
     }
   }
 }
@@ -81,6 +98,10 @@ extension TodayViewController: UITableViewDataSource {
     }
     
     return CustomCell()
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 70
   }
   
 }
