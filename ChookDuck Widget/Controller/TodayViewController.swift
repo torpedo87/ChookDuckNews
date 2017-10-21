@@ -25,13 +25,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    
-    if ClubDataService.instance.selectedClub != nil {
-      DataService.instance.fetchFeed { (newsDict) in
+    guard let myClub = DataService.instance.selectedClub else { return }
+    DataService.instance.fetchFeed() { (success) in
+      if success {
         self.tableView.reloadData()
       }
     }
-    
   }
   
   override func viewDidLayoutSubviews() {
@@ -40,19 +39,25 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   @objc func redraw(_ notification: Notification) {
-    tableView.reloadData()
+    guard let myClub = DataService.instance.selectedClub else { return }
+    
+    DataService.instance.fetchFeed() { (success) in
+      if success {
+        self.tableView.reloadData()
+      }
+    }
   }
   
   //위젯이 업데이트 될 때까지 최근 스냅샷을 제공
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-    if ClubDataService.instance.selectedClub != nil {
-      DataService.instance.fetchFeed { (success) in
-        if success {
-          self.tableView.reloadData()
-          completionHandler(.newData)
-        } else {
-          completionHandler(.failed)
-        }
+    guard let myClub = DataService.instance.selectedClub else { return }
+    
+    DataService.instance.fetchFeed() { (success) in
+      if success {
+        self.tableView.reloadData()
+        completionHandler(.newData)
+      } else {
+        completionHandler(.failed)
       }
     }
     
@@ -66,8 +71,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   @IBAction func reloadBtnPressed(_ sender: Any) {
-    if ClubDataService.instance.selectedClub != nil {
-      DataService.instance.fetchFeed { (newsDict) in
+    guard let myClub = DataService.instance.selectedClub else { return }
+    
+    DataService.instance.fetchFeed() { (success) in
+      if success {
         self.tableView.reloadData()
       }
     }

@@ -12,7 +12,7 @@ import Fuzi
 class FeedVC: UIViewController {
   
   var tableView = UITableView()
-  
+  var addButtom = UIButton()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,19 +20,20 @@ class FeedVC: UIViewController {
     tableView.delegate = self
     
     self.view.addSubview(tableView)
-    let addTeamBtnItem = UIBarButtonItem(title: "Select Team", style: .plain, target: self, action: #selector(FeedVC.addBtnPressed))
-    self.navigationItem.setRightBarButton(addTeamBtnItem, animated: true)
+    self.view.addSubview(addButtom)
+    addButtom.setImage(UIImage(named: "team"), for: UIControlState.normal)
+    addButtom.addTarget(self, action: #selector(FeedVC.addBtnPressed), for: .touchUpInside)
     NotificationCenter.default.addObserver(self, selector: #selector(FeedVC.redraw(_:)), name: NOTI_CLUB_CHANGED, object: nil)
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     
-    if ClubDataService.instance.selectedClub != nil {
-      DataService.instance.fetchFeed { (success) in
-        if success {
-          self.tableView.reloadData()
-        }
+    guard let myClub = DataService.instance.selectedClub else { return }
+    
+    DataService.instance.fetchFeed() { (success) in
+      if success {
+        self.tableView.reloadData()
       }
     }
     
@@ -45,15 +46,26 @@ class FeedVC: UIViewController {
       make.bottom.left.right.equalTo(self.view)
       make.top.equalTo(self.view).offset(20)
     }
+    
+    addButtom.snp.makeConstraints { (make) in
+      make.width.height.equalTo(100)
+      make.right.bottom.equalTo(self.view).offset(-10)
+    }
   }
   
   @objc func addBtnPressed() {
     let selectTeamVC = SelectTeamVC()
-    self.navigationController?.pushViewController(selectTeamVC, animated: true)
+    present(selectTeamVC, animated: true, completion: nil)
   }
   
   @objc func redraw(_ notification: Notification) {
-    tableView.reloadData()
+    guard let myClub = DataService.instance.selectedClub else { return }
+    
+    DataService.instance.fetchFeed() { (success) in
+      if success {
+        self.tableView.reloadData()
+      }
+    }
   }
 
 }

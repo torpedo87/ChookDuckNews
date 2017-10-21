@@ -15,6 +15,13 @@ class SelectTeamVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     //view.backgroundColor = UIColor.white
+    
+    for i in 0..<ClubDataService.instance.leagues.count {
+      ClubDataService.instance.fetchClub(league: ClubDataService.instance.leagues[i], completion: { (clubs) in
+        ClubDataService.instance.leagues[i].clubs = clubs
+      })
+    }
+    
     tableView.delegate = self
     tableView.dataSource = self
     tableView.register(TeamCell.self, forCellReuseIdentifier: "teamCell")
@@ -35,8 +42,9 @@ class SelectTeamVC: UIViewController {
 
 extension SelectTeamVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let club = ClubDataService.instance.countries[indexPath.section].league[indexPath.row]
-    ClubDataService.instance.selectedClub = club
+    guard let clubs = ClubDataService.instance.leagues[indexPath.section].clubs else { return }
+    let club = clubs[indexPath.row]
+    DataService.instance.selectedClub = club
     NotificationCenter.default.post(name: NOTI_CLUB_CHANGED, object: nil)
     dismiss(animated: true, completion: nil)
   }
@@ -45,15 +53,16 @@ extension SelectTeamVC: UITableViewDelegate {
 extension SelectTeamVC: UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     
-    return ClubDataService.instance.countries.count
+    return ClubDataService.instance.leagues.count
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return ClubDataService.instance.countries[section].name
+    return ClubDataService.instance.leagues[section].name
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return ClubDataService.instance.countries[section].league.count
+    guard let clubs = ClubDataService.instance.leagues[section].clubs else { fatalError() }
+    return clubs.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

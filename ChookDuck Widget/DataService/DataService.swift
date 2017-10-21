@@ -13,14 +13,15 @@ class DataService {
   static let instance = DataService()
   
   var articles = [Article]()
+  var selectedClub: Club?
   
   func fetchFeed(completion: @escaping CompletionHandler) {
     
     articles.removeAll()
-    
+    let url = "https://news.google.com/search/section/q/\(self.selectedClub?.name)/\(self.selectedClub?.name)?hl=ko&ned=kr"
     var html = ""
     do {
-      html = try String(contentsOf: URL(string: (ClubDataService.instance.selectedClub?.clubURL)!)!)
+      html = try String(contentsOf: URL(string: (url))!)
     } catch {
       print(error.localizedDescription)
     }

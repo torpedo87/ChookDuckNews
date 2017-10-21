@@ -8,18 +8,17 @@
 
 import Foundation
 
-struct Country {
+struct League {
+  init(title: String, url: String) {
+    name = title
+    leagueURL = url
+  }
   var name: String!
-  var league: [Club]!
+  var clubs: [Club]?
+  var leagueURL: String!
+  
 }
 
 struct Club {
   var name: String!
-  
-  var clubURL: String {
-    get {
-      return "https://news.google.com/search/section/q/\(name)/\(name)?hl=ko&ned=kr"
-    }
-  }
-  
 }

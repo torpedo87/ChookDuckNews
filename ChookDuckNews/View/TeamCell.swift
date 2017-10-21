@@ -44,8 +44,8 @@ class TeamCell: UITableViewCell {
   }
   
   func configureCell(indexPath: IndexPath) {
-    let club = ClubDataService.instance.countries[indexPath.section].league[indexPath.row]
-    imgView.image = UIImage(named: club.name)
+    guard let clubs = ClubDataService.instance.leagues[indexPath.section].clubs else { return }
+    let club = clubs[indexPath.row]
     titleLabel.text = club.name
   }
   
