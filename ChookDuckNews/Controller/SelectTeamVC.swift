@@ -11,10 +11,12 @@ import UIKit
 class SelectTeamVC: UIViewController {
 
   var tableView = UITableView()
+  var spinner = UIActivityIndicatorView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    //view.backgroundColor = UIColor.white
+    view.addSubview(spinner)
+    spinner.isHidden = true
     
     for i in 0..<ClubDataService.instance.leagues.count {
       ClubDataService.instance.fetchClub(league: ClubDataService.instance.leagues[i], completion: { (clubs) in
@@ -37,16 +39,28 @@ class SelectTeamVC: UIViewController {
       make.left.bottom.right.equalTo(self.view)
       make.top.equalTo(self.view).offset(20)
     }
+    
+    spinner.snp.makeConstraints { (make) in
+      make.width.height.equalTo(100)
+      make.center.equalTo(self.view)
+    }
   }
 }
 
 extension SelectTeamVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let clubs = ClubDataService.instance.leagues[indexPath.section].clubs else { return }
-    let club = clubs[indexPath.row]
+    spinner.isHidden = false
+    spinner.startAnimating()
+    
+    guard let clubs = ClubDataService.instance.leagues[indexPath.section].clubs as? [Club] else { return }
+    let club = clubs[indexPath.row] as Club
     DataService.instance.selectedClub = club
+    UserDefaults.init(suiteName: "group.chookduck.samchon")?.setValue(club.name, forKey: "myClub")
     NotificationCenter.default.post(name: NOTI_CLUB_CHANGED, object: nil)
-    dismiss(animated: true, completion: nil)
+    dismiss(animated: true) {
+      self.spinner.isHidden = true
+      self.spinner.stopAnimating()
+    }
   }
 }
 

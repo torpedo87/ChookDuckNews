@@ -16,6 +16,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    if let clubName = UserDefaults.init(suiteName: "group.chookduck.samchon")?.value(forKey: "myClub") as? String {
+      DataService.instance.selectedClub = Club(name: clubName)
+    }
+    
     tableView.delegate = self
     tableView.dataSource = self
     NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.redraw(_:)), name: NOTI_CLUB_CHANGED, object: nil)
@@ -25,7 +30,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    guard let myClub = DataService.instance.selectedClub else { return }
+    //guard let myClub = DataService.instance.selectedClub else { return }
     DataService.instance.fetchFeed() { (success) in
       if success {
         self.tableView.reloadData()
@@ -39,7 +44,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   @objc func redraw(_ notification: Notification) {
-    guard let myClub = DataService.instance.selectedClub else { return }
+    //guard let myClub = DataService.instance.selectedClub else { return }
     
     DataService.instance.fetchFeed() { (success) in
       if success {
@@ -50,18 +55,18 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   
   //위젯이 업데이트 될 때까지 최근 스냅샷을 제공
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-    guard let myClub = DataService.instance.selectedClub else { return }
-    
-    DataService.instance.fetchFeed() { (success) in
-      if success {
-        self.tableView.reloadData()
-        completionHandler(.newData)
-      } else {
-        completionHandler(.failed)
-      }
-    }
-    
-    completionHandler(NCUpdateResult.newData)
+//    guard let myClub = DataService.instance.selectedClub else { return }
+//
+//    DataService.instance.fetchFeed() { (success) in
+//      if success {
+//        self.tableView.reloadData()
+//        completionHandler(.newData)
+//      } else {
+//        completionHandler(.failed)
+//      }
+//    }
+//
+//    completionHandler(NCUpdateResult.newData)
   }
   
   //위젯 높이 조절
@@ -71,7 +76,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   @IBAction func reloadBtnPressed(_ sender: Any) {
-    guard let myClub = DataService.instance.selectedClub else { return }
+    //guard let myClub = DataService.instance.selectedClub else { return }
     
     DataService.instance.fetchFeed() { (success) in
       if success {

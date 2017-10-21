@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480046401F9B2208005A4B0B /* MyClubVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4800463F1F9B2208005A4B0B /* MyClubVC.swift */; };
 		487FF66A1F99B85E009EE51B /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C18BA11F9749C5005AAE0C /* DataService.swift */; };
 		487FF66B1F99B862009EE51B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C18BA41F974A02005AAE0C /* Constant.swift */; };
 		487FF66C1F99B869009EE51B /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C18BA71F987599005AAE0C /* Article.swift */; };
@@ -24,7 +25,6 @@
 		48C831EE1F8F60E500AD914D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C831ED1F8F60E500AD914D /* AppDelegate.swift */; };
 		48C831F51F8F60E600AD914D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48C831F41F8F60E600AD914D /* Assets.xcassets */; };
 		48C831F81F8F60E600AD914D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48C831F61F8F60E600AD914D /* LaunchScreen.storyboard */; };
-		48C832031F8F61B000AD914D /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C832021F8F61B000AD914D /* FeedVC.swift */; };
 		48C832221F90B9DD00AD914D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48C832211F90B9DD00AD914D /* NotificationCenter.framework */; };
 		48C832251F90B9DD00AD914D /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C832241F90B9DD00AD914D /* TodayViewController.swift */; };
 		48C832281F90B9DD00AD914D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48C832261F90B9DD00AD914D /* MainInterface.storyboard */; };
@@ -62,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		07CB5166F21416533E04B9F2 /* Pods-ChookDuck Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChookDuck Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChookDuck Widget/Pods-ChookDuck Widget.debug.xcconfig"; sourceTree = "<group>"; };
+		4800463F1F9B2208005A4B0B /* MyClubVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyClubVC.swift; sourceTree = "<group>"; };
 		487FF6611F99B794009EE51B /* Pods_ChookDuckNews.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_ChookDuckNews.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		487FF6631F99B798009EE51B /* SnapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SnapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		487FF6651F99B7A1009EE51B /* Fuzi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Fuzi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,7 +81,6 @@
 		48C831F41F8F60E600AD914D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48C831F71F8F60E600AD914D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		48C831F91F8F60E600AD914D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		48C832021F8F61B000AD914D /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		48C832201F90B9DD00AD914D /* ChookDuck Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "ChookDuck Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48C832211F90B9DD00AD914D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		48C832241F90B9DD00AD914D /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -211,8 +211,8 @@
 		48C831FF1F8F617C00AD914D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				48C832021F8F61B000AD914D /* FeedVC.swift */,
 				487FF6761F99D5A7009EE51B /* SelectTeamVC.swift */,
+				4800463F1F9B2208005A4B0B /* MyClubVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -489,8 +489,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				487FF66A1F99B85E009EE51B /* DataService.swift in Sources */,
-				48C832031F8F61B000AD914D /* FeedVC.swift in Sources */,
 				48C831EE1F8F60E500AD914D /* AppDelegate.swift in Sources */,
+				480046401F9B2208005A4B0B /* MyClubVC.swift in Sources */,
 				487FF66F1F99BA1B009EE51B /* Club.swift in Sources */,
 				487FF66B1F99B862009EE51B /* Constant.swift in Sources */,
 				487FF6781F99D5A7009EE51B /* SelectTeamVC.swift in Sources */,
@@ -662,6 +662,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J6JJA4UC5Z;
 				INFOPLIST_FILE = ChookDuckNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.samchon.ChookDuckNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -680,6 +681,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J6JJA4UC5Z;
 				INFOPLIST_FILE = ChookDuckNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.samchon.ChookDuckNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -696,6 +698,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J6JJA4UC5Z;
 				INFOPLIST_FILE = "ChookDuck Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samchon.ChookDuckNews.ChookDuck-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -713,6 +716,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = J6JJA4UC5Z;
 				INFOPLIST_FILE = "ChookDuck Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samchon.ChookDuckNews.ChookDuck-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";

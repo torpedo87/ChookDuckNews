@@ -18,10 +18,18 @@ class DataService {
   func fetchFeed(completion: @escaping CompletionHandler) {
     
     articles.removeAll()
-    let url = "https://news.google.com/search/section/q/\(self.selectedClub?.name)/\(self.selectedClub?.name)?hl=ko&ned=kr"
+    
+    var urlString = ""
+    if let name: String = selectedClub?.name {
+      let noSpaceName = name.removingWhitespaces()
+      urlString = "https://news.google.com/news/search/section/q/\(noSpaceName)/\(noSpaceName)?hl=ko&ned=kr"
+    } else {
+      urlString = "https://news.google.com/news/search/section/q/manchesterunited/manchesterunited?hl=ko&ned=kr"
+    }
+    
     var html = ""
     do {
-      html = try String(contentsOf: URL(string: (url))!)
+      html = try String(contentsOf: URL(string: urlString)!)
     } catch {
       print(error.localizedDescription)
     }
@@ -62,5 +70,11 @@ class DataService {
       print("error: ", error.localizedDescription)
     }
     
+  }
+}
+
+extension String {
+  func removingWhitespaces() -> String {
+    return components(separatedBy: .whitespaces).joined()
   }
 }
