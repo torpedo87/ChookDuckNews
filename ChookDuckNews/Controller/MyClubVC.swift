@@ -14,10 +14,18 @@ class MyClubVC: UIViewController {
   var myTeamLabel = UILabel()
   var selectTeamBtn = UIButton()
   var spinner = UIActivityIndicatorView()
+  var topView = UIView()
+  var topLabel = UILabel()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = UIColor.white
+    view.addSubview(topView)
+    topView.backgroundColor = #colorLiteral(red: 0.9385011792, green: 0.7164435983, blue: 0.3331357837, alpha: 1)
+    topView.addSubview(topLabel)
+    topLabel.text = "My Team"
+    topLabel.textColor = UIColor.white
+    topLabel.textAlignment = .center
     view.addSubview(titleLabel)
     view.addSubview(myTeamLabel)
     view.addSubview(selectTeamBtn)
@@ -67,6 +75,15 @@ class MyClubVC: UIViewController {
     spinner.snp.makeConstraints { (make) in
       make.width.height.equalTo(100)
       make.center.equalTo(self.view)
+    }
+    topView.snp.makeConstraints { (make) in
+      make.left.top.right.equalTo(self.view)
+      make.height.equalTo(70)
+    }
+    topLabel.snp.makeConstraints { (make) in
+      make.center.equalTo(topView)
+      make.width.equalTo(300)
+      make.height.equalTo(50)
     }
   }
   
