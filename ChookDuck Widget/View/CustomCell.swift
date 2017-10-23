@@ -8,10 +8,20 @@
 
 import UIKit
 
+protocol CheckBtnDelegate: class {
+  func checkBtnDidTap(sender: UIButton)
+}
+
+extension CheckBtnDelegate {
+  func checkBtnDidTap(sender: UIButton) {}
+}
+
 class CustomCell: UITableViewCell {
   
   @IBOutlet weak var newsImg: UIImageView!
   @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var checkBtn: UIButton!
+  weak var checkBtndelegate: CheckBtnDelegate?
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -24,12 +34,17 @@ class CustomCell: UITableViewCell {
     // Configure the view for the selected state
   }
   
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    checkBtn.isSelected = false
+  }
+  
   func setupView() {
     //self.layer.backgroundColor = UIColor.lightGray.cgColor
     self.layer.cornerRadius = 10
-    
     //이미지가 셀 밖으로 안 삐져나가도록
     self.clipsToBounds = true
+    checkBtn.addTarget(self, action: #selector(checkBtnDidTap), for: .touchUpInside)
   }
   
   func configureCell(index: Int) {
@@ -69,4 +84,8 @@ class CustomCell: UITableViewCell {
     task.resume()
   }
   
+  @objc func checkBtnDidTap() {
+    self.checkBtndelegate?.checkBtnDidTap(sender: checkBtn)
+  }
+
 }

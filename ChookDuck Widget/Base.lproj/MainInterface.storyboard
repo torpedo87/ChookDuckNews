@@ -48,32 +48,42 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5OA-Ls-Quo">
-                                                    <rect key="frame" x="60" y="-4" width="255" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="BzG-U8-dmD"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="QMd-6Q-S7u"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="100" y="0.0" width="212" height="44"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zVn-n1-Z4R">
-                                                    <rect key="frame" x="5" y="-4" width="50" height="50"/>
+                                                    <rect key="frame" x="42" y="-3" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="PfV-J0-usp"/>
-                                                        <constraint firstAttribute="width" constant="50" id="Ykl-ze-kpo"/>
+                                                        <constraint firstAttribute="height" constant="50" id="fEX-z3-8sE"/>
+                                                        <constraint firstAttribute="width" constant="50" id="xq7-1c-hnV"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wcb-R0-C2S">
+                                                    <rect key="frame" x="9" y="0.0" width="25" height="43.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="4kh-5b-dxE"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="unchecked"/>
+                                                    <state key="selected" image="checked"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="zVn-n1-Z4R" firstAttribute="centerY" secondItem="YMz-BB-dd7" secondAttribute="centerY" id="9el-wL-ERj"/>
-                                                <constraint firstItem="5OA-Ls-Quo" firstAttribute="leading" secondItem="zVn-n1-Z4R" secondAttribute="trailing" constant="5" id="LWP-2l-ycB"/>
-                                                <constraint firstItem="zVn-n1-Z4R" firstAttribute="leading" secondItem="YMz-BB-dd7" secondAttribute="leading" constant="5" id="QXr-C3-277"/>
-                                                <constraint firstAttribute="trailing" secondItem="5OA-Ls-Quo" secondAttribute="trailing" constant="5" id="Tmr-H3-c2h"/>
-                                                <constraint firstItem="5OA-Ls-Quo" firstAttribute="top" secondItem="zVn-n1-Z4R" secondAttribute="top" id="hGz-2D-HQy"/>
+                                                <constraint firstItem="zVn-n1-Z4R" firstAttribute="centerY" secondItem="YMz-BB-dd7" secondAttribute="centerY" id="99T-ae-cwy"/>
+                                                <constraint firstAttribute="bottom" secondItem="Wcb-R0-C2S" secondAttribute="bottom" id="FIb-RR-eF1"/>
+                                                <constraint firstAttribute="bottom" secondItem="5OA-Ls-Quo" secondAttribute="bottom" id="IiD-Tc-oAd"/>
+                                                <constraint firstItem="Wcb-R0-C2S" firstAttribute="centerY" secondItem="YMz-BB-dd7" secondAttribute="centerY" id="NXH-ba-Po8"/>
+                                                <constraint firstItem="Wcb-R0-C2S" firstAttribute="top" secondItem="YMz-BB-dd7" secondAttribute="top" id="TwN-eb-qh6"/>
+                                                <constraint firstItem="5OA-Ls-Quo" firstAttribute="leading" secondItem="zVn-n1-Z4R" secondAttribute="trailing" constant="8" id="YDz-7G-BW6"/>
+                                                <constraint firstItem="Wcb-R0-C2S" firstAttribute="leading" secondItem="YMz-BB-dd7" secondAttribute="leading" constant="9" id="gru-mU-dHa"/>
+                                                <constraint firstItem="zVn-n1-Z4R" firstAttribute="leading" secondItem="Wcb-R0-C2S" secondAttribute="trailing" constant="8" id="gzU-rS-FGS"/>
+                                                <constraint firstItem="5OA-Ls-Quo" firstAttribute="top" secondItem="YMz-BB-dd7" secondAttribute="top" id="ibG-It-EB4"/>
+                                                <constraint firstAttribute="trailing" secondItem="5OA-Ls-Quo" secondAttribute="trailing" constant="8" id="uqh-eO-JdG"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="checkBtn" destination="Wcb-R0-C2S" id="Hf5-0a-6Kg"/>
                                             <outlet property="newsImg" destination="zVn-n1-Z4R" id="fr1-yv-02E"/>
                                             <outlet property="titleLabel" destination="5OA-Ls-Quo" id="hmC-td-Fmr"/>
                                         </connections>
@@ -106,6 +116,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checked" width="25" height="25"/>
         <image name="reload" width="25" height="25"/>
+        <image name="unchecked" width="25" height="25"/>
     </resources>
 </document>

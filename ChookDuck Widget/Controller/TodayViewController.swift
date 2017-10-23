@@ -13,6 +13,7 @@ import Fuzi
 class TodayViewController: UIViewController, NCWidgetProviding {
   
   @IBOutlet weak var tableView: UITableView!
+  //weak var delegate: CheckBtnDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -26,11 +27,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.redraw(_:)), name: NOTI_CLUB_CHANGED, object: nil)
     
     extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-  }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    //guard let myClub = DataService.instance.selectedClub else { return }
+    
     DataService.instance.fetchFeed() { (success) in
       if success {
         self.tableView.reloadData()
@@ -44,7 +41,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   @objc func redraw(_ notification: Notification) {
-    //guard let myClub = DataService.instance.selectedClub else { return }
     
     DataService.instance.fetchFeed() { (success) in
       if success {
@@ -72,7 +68,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   //위젯 높이 조절
   func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
     let expanded = activeDisplayMode == .expanded
-    preferredContentSize = expanded ? CGSize(width: maxSize.width, height: 500) : maxSize
+    preferredContentSize = expanded ? CGSize(width: maxSize.width, height: 520) : maxSize
   }
   
   @IBAction func reloadBtnPressed(_ sender: Any) {
@@ -92,6 +88,22 @@ extension TodayViewController: UITableViewDelegate {
     extensionContext?.open(url, completionHandler: nil)
   }
   
+//  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+//
+//    return .none
+//  }
+//
+//  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//    let deleteAction = UITableViewRowAction(style: .destructive, title: "DELETE") { (rowAction, indexPath) in
+//      if let cell = tableView.cellForRow(at: indexPath) as? CustomCell {
+//        if cell.checkBtn.isSelected {
+//          tableView.deleteRows(at: [indexPath], with: .automatic)
+//        }
+//      }
+//
+//    }
+//    return [deleteAction]
+//  }
 }
 
 extension TodayViewController: UITableViewDataSource {
@@ -106,7 +118,7 @@ extension TodayViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomCell {
       cell.configureCell(index: indexPath.row)
-      
+      cell.checkBtndelegate = self
       return cell
     }
     
@@ -115,5 +127,23 @@ extension TodayViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 70
+  }
+  
+//  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+//    return true
+//  }
+}
+
+extension TodayViewController: CheckBtnDelegate {
+  func checkBtnDidTap(sender: UIButton) {
+    sender.isSelected = !sender.isSelected
+    if sender.isSelected {
+      if let cell = sender.superview?.superview as? CustomCell {
+        let indexPath = tableView.indexPath(for: cell)
+        DataService.instance.articles.remove(at: (indexPath?.row)!)
+        tableView.reloadData()
+        
+      }
+    }
   }
 }

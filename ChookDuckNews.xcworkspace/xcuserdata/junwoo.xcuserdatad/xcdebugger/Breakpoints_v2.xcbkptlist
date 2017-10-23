@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChookDuck Widget/DataService/DataService.swift"
-            timestampString = "530266259.86992"
+            timestampString = "530453837.909617"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
@@ -32,6 +32,22 @@
             startingLineNumber = "79"
             endingLineNumber = "79"
             landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChookDuck Widget/Controller/TodayViewController.swift"
+            timestampString = "530453837.909751"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "checkBtnDidTap(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
