@@ -10,25 +10,27 @@ import UIKit
 
 class TeamCell: UITableViewCell {
   
-  var imgView = UIImageView()
+  //var imgView = UIImageView()
+  var rankLabel = UILabel()
   var titleLabel = UILabel()
   
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     self.selectionStyle = .none
-    self.contentView.addSubview(imgView)
+    self.contentView.addSubview(rankLabel)
     self.contentView.addSubview(titleLabel)
     
-    imgView.snp.makeConstraints { (make) in
-      make.left.equalTo(self.contentView).offset(2)
-      make.width.height.equalTo(20)
+    rankLabel.snp.makeConstraints { (make) in
+      make.left.equalTo(self.contentView).offset(5)
+      make.height.equalTo(20)
+      make.width.equalTo(50)
       make.centerY.equalTo(self.contentView)
     }
     
     titleLabel.snp.makeConstraints { (make) in
       make.centerY.equalTo(self.contentView)
       make.height.equalTo(20)
-      make.left.equalTo(imgView.snp.right).offset(5)
+      make.left.equalTo(rankLabel.snp.right).offset(5)
       make.right.equalTo(self.contentView).offset(-2)
     }
   }
@@ -47,6 +49,7 @@ class TeamCell: UITableViewCell {
     guard let clubs = ClubDataService.instance.leagues[indexPath.section].clubs else { return }
     let club = clubs[indexPath.row]
     titleLabel.text = club.name
+    rankLabel.text = "\(indexPath.row + 1) 위"
   }
   
 }

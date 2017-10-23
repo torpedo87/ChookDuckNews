@@ -91,6 +91,7 @@ extension TodayViewController: UITableViewDelegate {
     guard let url = URL(string: DataService.instance.articles[indexPath.row].articleUrl) else { return }
     extensionContext?.open(url, completionHandler: nil)
   }
+  
 }
 
 extension TodayViewController: UITableViewDataSource {
@@ -115,5 +116,4 @@ extension TodayViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 70
   }
-  
 }
