@@ -19,6 +19,13 @@ class MyClubVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    setupView()
+    NotificationCenter.default.addObserver(self, selector: #selector(MyClubVC.redraw), name: NOTI_CLUB_CHANGED, object: nil)
+    fetchClubs()
+  }
+  
+  func setupView() {
     view.backgroundColor = UIColor.white
     view.addSubview(topView)
     topView.backgroundColor = #colorLiteral(red: 0.9385011792, green: 0.7164435983, blue: 0.3331357837, alpha: 1)
@@ -32,8 +39,6 @@ class MyClubVC: UIViewController {
     view.addSubview(spinner)
     spinner.isHidden = true
     
-    NotificationCenter.default.addObserver(self, selector: #selector(MyClubVC.redraw), name: NOTI_CLUB_CHANGED, object: nil)
-    
     if let myTeamName = UserDefaults.init(suiteName: "group.chookduck.samchon")?.value(forKey: "myClub") as? String {
       myTeamLabel.text = myTeamName
       DataService.instance.selectedClub = Club(name: myTeamName)
@@ -45,7 +50,6 @@ class MyClubVC: UIViewController {
     selectTeamBtn.addTarget(self, action: #selector(MyClubVC.goToSelectTeamVC), for: .touchUpInside)
     selectTeamBtn.backgroundColor = UIColor.blue
     titleLabel.text = "my Team : "
-    
   }
   
   override func viewDidLayoutSubviews() {
@@ -84,6 +88,14 @@ class MyClubVC: UIViewController {
       make.center.equalTo(topView)
       make.width.equalTo(300)
       make.height.equalTo(50)
+    }
+  }
+  
+  func fetchClubs() {
+    for i in 0..<ClubDataService.instance.leagues.count {
+      ClubDataService.instance.fetchClub(league: ClubDataService.instance.leagues[i], completion: { (clubs) in
+        ClubDataService.instance.leagues[i].clubs = clubs
+      })
     }
   }
   

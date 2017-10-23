@@ -11,7 +11,7 @@ import Foundation
 typealias CompletionHandler = (_ Success: Bool) -> ()
 
 //기사 갯수
-let NEWS_LIMIT: Int = 6
+let NEWS_LIMIT: Int = 7
 
 //리그
 

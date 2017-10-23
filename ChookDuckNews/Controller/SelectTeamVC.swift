@@ -21,12 +21,6 @@ class SelectTeamVC: UIViewController {
     
     spinner.isHidden = true
     
-    for i in 0..<ClubDataService.instance.leagues.count {
-      ClubDataService.instance.fetchClub(league: ClubDataService.instance.leagues[i], completion: { (clubs) in
-        ClubDataService.instance.leagues[i].clubs = clubs
-      })
-    }
-    
     tableView.delegate = self
     tableView.dataSource = self
     tableView.register(TeamCell.self, forCellReuseIdentifier: "teamCell")
