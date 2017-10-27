@@ -12,27 +12,44 @@ import Fuzi
 
 class TodayViewController: UIViewController, NCWidgetProviding {
   
-  @IBOutlet weak var tableView: UITableView!
-  //weak var delegate: CheckBtnDelegate?
+  @IBOutlet weak var containerView: UIView!
+  @IBOutlet weak var playerTableView: UITableView!
+  @IBOutlet weak var clubTableView: UITableView!
+  var isPlayerTableViewShowing = false
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    playerTableView.isHidden = true
     if let clubName = UserDefaults.init(suiteName: "group.chookduck.samchon")?.value(forKey: "myClub") as? String {
-      DataService.instance.selectedClub = Club(name: clubName)
+      DataService.instance.selectedClub = Club(title: clubName)
+    }
+    if let player = UserDefaults.init(suiteName: "group.chookduck.samchon")?.value(forKey: "myPlayer") as? String {
+      DataService.instance.selectedPlayer = player
     }
     
-    tableView.delegate = self
-    tableView.dataSource = self
-    NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.redraw(_:)), name: NOTI_CLUB_CHANGED, object: nil)
+    clubTableView.delegate = self
+    clubTableView.dataSource = self
+    playerTableView.delegate = self
+    playerTableView.dataSource = self
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.redrawClubNews(_:)), name: NOTI_CLUB_CHANGED, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(TodayViewController.redrawPlayerNews(_:)), name: NOTI_PLAYER_CHANGED, object: nil)
     
     extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     
-    DataService.instance.fetchFeed() { (success) in
+    DataService.instance.fetchClubFeed() { (success) in
       if success {
-        self.tableView.reloadData()
+        self.clubTableView.reloadData()
       }
     }
+    
+    DataService.instance.fetchPlayerFeed() { (success) in
+      if success {
+        self.playerTableView.reloadData()
+      }
+    }
+    
   }
   
   override func viewDidLayoutSubviews() {
@@ -40,29 +57,31 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
   }
   
-  @objc func redraw(_ notification: Notification) {
+  @objc func redrawClubNews(_ notification: Notification) {
     
-    DataService.instance.fetchFeed() { (success) in
+    DataService.instance.fetchClubFeed() { (success) in
       if success {
-        self.tableView.reloadData()
+        self.clubTableView.reloadData()
       }
     }
   }
   
+  @objc func redrawPlayerNews(_ notification: Notification) {
+    
+    DataService.instance.fetchPlayerFeed() { (success) in
+      if success {
+        self.playerTableView.reloadData()
+      }
+    }
+  }
+  
+  @objc func clubDidTap(_ gesture: UITapGestureRecognizer) {
+    
+  }
+  
   //위젯이 업데이트 될 때까지 최근 스냅샷을 제공
   func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-//    guard let myClub = DataService.instance.selectedClub else { return }
-//
-//    DataService.instance.fetchFeed() { (success) in
-//      if success {
-//        self.tableView.reloadData()
-//        completionHandler(.newData)
-//      } else {
-//        completionHandler(.failed)
-//      }
-//    }
-//
-//    completionHandler(NCUpdateResult.newData)
+
   }
   
   //위젯 높이 조절
@@ -72,38 +91,40 @@ class TodayViewController: UIViewController, NCWidgetProviding {
   }
   
   @IBAction func reloadBtnPressed(_ sender: Any) {
-    //guard let myClub = DataService.instance.selectedClub else { return }
-    
-    DataService.instance.fetchFeed() { (success) in
-      if success {
-        self.tableView.reloadData()
-      }
+    if isPlayerTableViewShowing {
+      
+      UIView.transition(from: playerTableView,
+                        to: clubTableView,
+                        duration: 1.0,
+                        options: [.transitionFlipFromLeft, .showHideTransitionViews],
+                        completion:nil)
+    } else {
+      
+      UIView.transition(from: clubTableView,
+                        to: playerTableView,
+                        duration: 1.0,
+                        options: [.transitionFlipFromRight, .showHideTransitionViews],
+                        completion: nil)
     }
+    isPlayerTableViewShowing = !isPlayerTableViewShowing
   }
 }
 
 extension TodayViewController: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let url = URL(string: DataService.instance.articles[indexPath.row].articleUrl) else { return }
-    extensionContext?.open(url, completionHandler: nil)
-  }
   
-//  func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-//
-//    return .none
-//  }
-//
-//  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//    let deleteAction = UITableViewRowAction(style: .destructive, title: "DELETE") { (rowAction, indexPath) in
-//      if let cell = tableView.cellForRow(at: indexPath) as? CustomCell {
-//        if cell.checkBtn.isSelected {
-//          tableView.deleteRows(at: [indexPath], with: .automatic)
-//        }
-//      }
-//
-//    }
-//    return [deleteAction]
-//  }
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    if tableView == clubTableView {
+      guard let url = URL(string: DataService.instance.clubArticles[indexPath.row].articleUrl) else { return }
+      
+      extensionContext?.open(url, completionHandler: nil)
+    } else {
+      guard let url = URL(string: DataService.instance.playerArticles[indexPath.row].articleUrl) else { return }
+      
+      extensionContext?.open(url, completionHandler: nil)
+    }
+
+  }
 }
 
 extension TodayViewController: UITableViewDataSource {
@@ -112,12 +133,21 @@ extension TodayViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return DataService.instance.articles.count
+    if tableView == clubTableView {
+      return DataService.instance.clubArticles.count
+    } else {
+      return DataService.instance.playerArticles.count
+    }
+    
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomCell {
-      cell.configureCell(index: indexPath.row)
+      if tableView == clubTableView {
+        cell.configureClubCell(index: indexPath.row)
+      } else {
+        cell.configurePlayerCell(index: indexPath.row)
+      }
       cell.checkBtndelegate = self
       return cell
     }
@@ -129,9 +159,6 @@ extension TodayViewController: UITableViewDataSource {
     return 70
   }
   
-//  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//    return true
-//  }
 }
 
 extension TodayViewController: CheckBtnDelegate {
@@ -139,9 +166,15 @@ extension TodayViewController: CheckBtnDelegate {
     sender.isSelected = !sender.isSelected
     if sender.isSelected {
       if let cell = sender.superview?.superview as? CustomCell {
-        let indexPath = tableView.indexPath(for: cell)
-        DataService.instance.articles.remove(at: (indexPath?.row)!)
-        tableView.reloadData()
+        if cell.superview == clubTableView {
+          let indexPath = clubTableView.indexPath(for: cell)
+          DataService.instance.clubArticles.remove(at: (indexPath?.row)!)
+          clubTableView.reloadData()
+        } else {
+          let indexPath = playerTableView.indexPath(for: cell)
+          DataService.instance.playerArticles.remove(at: (indexPath?.row)!)
+          playerTableView.reloadData()
+        }
         
       }
     }

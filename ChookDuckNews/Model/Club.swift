@@ -20,5 +20,9 @@ struct League {
 }
 
 struct Club {
+  init(title: String) {
+    name = title
+  }
   var name: String!
+  var squad: [String]?
 }

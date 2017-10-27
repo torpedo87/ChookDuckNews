@@ -47,11 +47,18 @@ class CustomCell: UITableViewCell {
     checkBtn.addTarget(self, action: #selector(checkBtnDidTap), for: .touchUpInside)
   }
   
-  func configureCell(index: Int) {
-    if let imgSrc = DataService.instance.articles[index].articleImg {
+  func configureClubCell(index: Int) {
+    if let imgSrc = DataService.instance.clubArticles[index].articleImg {
       fetchImage(src: imgSrc)
     }
-    titleLabel.text = DataService.instance.articles[index].articleTitle
+    titleLabel.text = DataService.instance.clubArticles[index].articleTitle
+  }
+  
+  func configurePlayerCell(index: Int) {
+    if let imgSrc = DataService.instance.playerArticles[index].articleImg {
+      fetchImage(src: imgSrc)
+    }
+    titleLabel.text = DataService.instance.playerArticles[index].articleTitle
   }
   
   func fetchImage(src: String) {

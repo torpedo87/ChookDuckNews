@@ -23,3 +23,4 @@ var ligue1 = League.init(title: "ligue1", url: "http://www.skysports.com/ligue-1
 
 //notification
 let NOTI_CLUB_CHANGED = Notification.Name("selectedClubChanged")
+let NOTI_PLAYER_CHANGED = Notification.Name("selectedPlayerChanged")

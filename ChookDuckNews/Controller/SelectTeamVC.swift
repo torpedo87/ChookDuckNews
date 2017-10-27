@@ -12,9 +12,6 @@ class SelectTeamVC: UIViewController {
 
   var tableView = UITableView()
   var spinner = UIActivityIndicatorView()
-  var topView = UIView()
-  var topLabel = UILabel()
-  var backButton = UIButton()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,43 +22,22 @@ class SelectTeamVC: UIViewController {
     tableView.dataSource = self
     tableView.register(TeamCell.self, forCellReuseIdentifier: "teamCell")
     
-    view.addSubview(topView)
-    topView.backgroundColor = #colorLiteral(red: 0.9385011792, green: 0.7164435983, blue: 0.3331357837, alpha: 1)
-    topView.addSubview(topLabel)
-    topLabel.text = "Choose one Team"
-    topLabel.textAlignment = .center
-    topLabel.textColor = UIColor.white
-    topView.addSubview(backButton)
-    backButton.setTitle("Back", for: .normal)
-    backButton.setTitleColor(UIColor.white, for: .normal)
-    backButton.addTarget(self, action: #selector(SelectTeamVC.backBtnPressed), for: .touchUpInside)
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(SelectTeamVC.cancelBtnPressed))
+    self.navigationItem.title = "SELECT MY TEAM"
     view.addSubview(tableView)
     view.addSubview(spinner)
   }
   
-  @objc func backBtnPressed() {
-    dismiss(animated: true, completion: nil)
+  @objc func cancelBtnPressed() {
+    self.navigationController?.dismiss(animated: true, completion: nil)
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    topView.snp.makeConstraints { (make) in
-      make.left.top.right.equalTo(self.view)
-      make.height.equalTo(70)
-    }
-    topLabel.snp.makeConstraints { (make) in
-      make.center.equalTo(topView)
-      make.width.equalTo(200)
-      make.height.equalTo(50)
-    }
-    backButton.snp.makeConstraints { (make) in
-      make.width.height.equalTo(50)
-      make.left.equalTo(topView).offset(2)
-      make.centerY.equalTo(topView)
-    }
+    
     tableView.snp.makeConstraints { (make) in
       make.left.bottom.right.equalTo(self.view)
-      make.top.equalTo(topView.snp.bottom)
+      make.top.equalTo((self.navigationController?.navigationBar.snp.bottom)!)
     }
     
     spinner.snp.makeConstraints { (make) in
@@ -81,16 +57,20 @@ extension SelectTeamVC: UITableViewDelegate {
     DataService.instance.selectedClub = club
     UserDefaults.init(suiteName: "group.chookduck.samchon")?.setValue(club.name, forKey: "myClub")
     NotificationCenter.default.post(name: NOTI_CLUB_CHANGED, object: nil)
-    dismiss(animated: true) {
+    
+    ClubDataService.instance.fetchSquad(club: club) { (squad) in
+      DataService.instance.selectedClub?.squad = squad
+      let selectPlayerVC = SelectPlayerVC()
+      self.navigationController?.pushViewController(selectPlayerVC, animated: true)
       self.spinner.isHidden = true
       self.spinner.stopAnimating()
     }
+    
   }
 }
 
 extension SelectTeamVC: UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
-    
     return ClubDataService.instance.leagues.count
   }
   
