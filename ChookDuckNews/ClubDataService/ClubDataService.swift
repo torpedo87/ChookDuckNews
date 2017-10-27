@@ -55,7 +55,7 @@ class ClubDataService {
     let newUrl = toArray.joined(separator: "-").lowercased()
     
     var squadURL = "http://www.skysports.com/\(newUrl)-squad"
-    print("url---------------", squadURL)
+    
     do {
       html = try String(contentsOf: URL(string: squadURL)!)
       
@@ -67,7 +67,6 @@ class ClubDataService {
       let doc = try HTMLDocument(string: html, encoding: String.Encoding.utf8)
       
       for h6 in doc.css("h6") {
-        print("h6=========", h6.stringValue)
         tempSquad.append(h6.stringValue)
         
       }

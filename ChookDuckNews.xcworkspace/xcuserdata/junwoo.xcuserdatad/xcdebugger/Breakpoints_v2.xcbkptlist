@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChookDuck Widget/Controller/TodayViewController.swift"
-            timestampString = "530806832.534193"
+            timestampString = "530810498.622044"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "166"
@@ -47,8 +47,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "141"
             endingLineNumber = "141"
-            landmarkName = "MyClubVC"
-            landmarkType = "3">
+            landmarkName = "goToSelectTeamVC()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChookDuck Widget/Controller/TodayViewController.swift"
-            timestampString = "530806832.534863"
+            timestampString = "530810498.622142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"

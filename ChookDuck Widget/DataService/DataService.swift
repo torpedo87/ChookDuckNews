@@ -79,15 +79,16 @@ class DataService {
     
     var urlString = ""
     if let name: String = selectedPlayer {
-      let noSpaceName = name.removingWhitespaces()
-      urlString = "https://news.google.com/news/search/section/q/\(noSpaceName)/\(noSpaceName)?hl=ko&ned=kr"
+//      let toArray = name.components(separatedBy: " ")
+//      let replacedName = toArray.joined(separator: "%") as String
+      urlString = "https://news.google.com/news/search/section/q/\(name)/\(name)?hl=ko&ned=kr"
     } else {
-      urlString = "https://news.google.com/news/search/section/q/manchesterunited/manchesterunited?hl=ko&ned=kr"
+      urlString = "https://news.google.com/news/search/section/q/Heung-Min%Son/Heung-Min%Son?hl=ko&ned=kr"
     }
-    
     var html = ""
+    
     do {
-      html = try String(contentsOf: URL(string: urlString)!)
+      html = try String(contentsOf: URL(string: urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!)!)
     } catch {
       print(error.localizedDescription)
     }
