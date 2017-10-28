@@ -79,8 +79,7 @@ class DataService {
     
     var urlString = ""
     if let name: String = selectedPlayer {
-//      let toArray = name.components(separatedBy: " ")
-//      let replacedName = toArray.joined(separator: "%") as String
+
       urlString = "https://news.google.com/news/search/section/q/\(name)/\(name)?hl=ko&ned=kr"
     } else {
       urlString = "https://news.google.com/news/search/section/q/Heung-Min%Son/Heung-Min%Son?hl=ko&ned=kr"

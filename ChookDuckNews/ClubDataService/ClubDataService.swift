@@ -54,7 +54,7 @@ class ClubDataService {
     let toArray = club.name.components(separatedBy: " ")
     let newUrl = toArray.joined(separator: "-").lowercased()
     
-    var squadURL = "http://www.skysports.com/\(newUrl)-squad"
+    let squadURL = "http://www.skysports.com/\(newUrl)-squad"
     
     do {
       html = try String(contentsOf: URL(string: squadURL)!)

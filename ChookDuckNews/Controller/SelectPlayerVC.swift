@@ -28,7 +28,7 @@ class SelectPlayerVC: UIViewController {
     
     tableView.snp.makeConstraints { (make) in
       make.left.bottom.right.equalTo(self.view)
-      make.top.equalTo((self.navigationController?.navigationBar.snp.bottom)!)
+      make.top.equalTo(self.view).offset(30)
     }
     
   }
@@ -37,7 +37,7 @@ class SelectPlayerVC: UIViewController {
 extension SelectPlayerVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
-    guard let squad = DataService.instance.selectedClub?.squad as? [String] else { return }
+    guard let squad = DataService.instance.selectedClub?.squad else { return }
     let player = squad[indexPath.row] as String
     DataService.instance.selectedPlayer = player
     
@@ -59,7 +59,7 @@ extension SelectPlayerVC: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let squad = DataService.instance.selectedClub?.squad else { fatalError() }
-    if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? UITableViewCell {
+    if let cell = tableView.dequeueReusableCell(withIdentifier: "cell") {
       cell.textLabel?.text = squad[indexPath.row]
       return cell
     } else {
